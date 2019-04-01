@@ -1,0 +1,53 @@
+<!-- Inicio list contribution -->
+<app-list-contribution></app-list-contribution>
+<!-- Fim list contribution -->
+
+
+<h4 class="ml-4">Solicitar Novo Bloqueio</h4>
+<div class="card-body margin">
+    <div class="card-body border border-info col-md-12">
+        <div class="row">
+            <div class="col">
+                <form class="form-horizontal" [formGroup]="form">
+                    <div class="row col">
+                        <div class="col-md-9 form-group">
+                            <label>Solicitante</label>
+                            <input type="text" id="usuarioAporte" maxlength="80" formControlName="usuarioAporte" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.usuarioAporte.errors }" />
+                            <div *ngIf="submitted && f.usuarioAporte.errors" class="invalid-feedback">
+                                <div *ngIf="f.usuarioAporte.errors.required">Solicitante é Obrigatório</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 form-group">
+                            <label>Data Solicitação:</label>
+                            <br>
+                            <input type="datetime" class="form-control" id="dataSolicitacaoAporte" name="dataSolicitacaoAporte"
+                                value="{{dataLiberacaoPrevista}}" disabled>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>*Valor R$:</label>
+                            <input type="text" class="form-control" id="valorAporte" name="valorAporte" [ngClass]="{ 'is-invalid': submitted && f.valorAporte.errors }"
+                                placeholder="R$ 0,00" currencyMask formControlName="valorAporte" />
+                            <div *ngIf="submitted && f.valorAporte.errors" class="invalid-feedback">
+                                <div *ngIf="f.valorAporte.errors.required">Valor Obrigatório</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mt-2 mb-2 text-right form-group">
+                            <br>
+                            <button id="btn-salvar" [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+                        </div>
+                    </div>
+                    <div *ngIf="mensagemSucessoAporte">
+                        <span class="text-success">{{mensagemSucessoAporte}}</span>
+                    </div>
+                    <div *ngIf="mensagemErroAporte">
+                        <span class="text-danger">{{mensagemErroAporte}}</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

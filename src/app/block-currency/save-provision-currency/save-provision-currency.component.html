@@ -1,0 +1,73 @@
+<div class="card-body margin">
+    <div class="card-body border border-secondary col-md-12" style="background-color: rgb(240, 243, 243)">
+        <div class="row">
+            <div class="col">
+                <form class="form-horizontal" [formGroup]="registerForm">
+                    <div class="row col">
+
+                        <div class="col-md-9 form-group">
+                            <label>Solicitante</label>
+                            <input type="text" id="usuario" maxlength="80" formControlName="usuario"
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usuario.errors }" />
+                            <div *ngIf="submitted && f.usuario.errors" class="invalid-feedback">
+                                <div *ngIf="f.usuario.errors.required">Solicitante é Obrigatório</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>Data Solicitação:</label>
+                            <br>
+                            <input type="datetime" class="form-control" id="dataSolicitacao" name="dataSolicitacao"
+                                value="{{ dataSolicitacao }}" disabled>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>*Data de Liberação De: - Até:</label>
+
+                            <ejs-daterangepicker id='dataLiberacaoPrevista' formControlName="dataLiberacaoPrevista"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.dataLiberacaoPrevista.errors }"
+                                [(ngModel)]='dataLiberacaoPrevista' placeholder='Selecione uma data'>
+
+                            </ejs-daterangepicker>
+
+                            <div *ngIf="submitted && f.dataLiberacaoPrevista.errors" class="invalid-feedback">
+                                <div *ngIf="f.dataLiberacaoPrevista.errors.required">Data de Liberação é Obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label>*Valor R$:</label>
+                            <input type="text" class="form-control" id="valorSolicitado" name="valorSolicitado"
+                                [ngClass]="{ 'is-invalid': submitted && f.valorSolicitado.errors }"
+                                placeholder="R$ 0,00" currencyMask formControlName="valorSolicitado" />
+                            <div *ngIf="submitted && f.valorSolicitado.errors" class="invalid-feedback">
+                                <div *ngIf="f.valorSolicitado.errors.required">Valor Obrigatório</div>
+                            </div>
+                        </div>
+
+                        <div class="col mt-2 mb-2 text-right form-group">
+                            <br>
+                            <button id="btn-salvar" [disabled]="loading" class="btn btn-primary"
+                                (click)="onSubmit()">Salvar</button>
+                        </div>
+                    </div>
+                    <div *ngIf="mensagemSucesso">
+                        <span class="text-success">{{mensagemSucesso}}</span>
+                    </div>
+                    <div *ngIf="mensagemErro">
+                        <span class="text-danger">{{mensagemErro}}</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lista de Lancamentos -->
+<div class="card-body">
+    <div class="card-body border border-secondary col-md-12">
+        <app-list-provision-currency></app-list-provision-currency>
+    </div>
+</div>
